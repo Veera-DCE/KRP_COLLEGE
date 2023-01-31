@@ -1,0 +1,9 @@
+.login-bg {
+    background: linear-gradient(blue, pink);
+    background-repeat:no-repeat;
+    background-size:contain;
+    height:66.2vh;
+}
+.navbar-bg {
+    background-color: linear-gradient(blue, pink) !important;
+}
