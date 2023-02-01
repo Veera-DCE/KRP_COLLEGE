@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jan 31, 2023 at 11:34 AM
+-- Generation Time: Feb 01, 2023 at 06:59 AM
 -- Server version: 5.7.36
 -- PHP Version: 7.4.26
 
@@ -67,6 +67,7 @@ CREATE TABLE IF NOT EXISTS `students` (
   `rollno` varchar(200) NOT NULL,
   `address` varchar(200) NOT NULL,
   `behaviour` varchar(200) NOT NULL,
+  `scholarship` varchar(100) DEFAULT NULL,
   `fee_amount` float NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
