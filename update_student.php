@@ -5,9 +5,10 @@ $rollno = $_POST['c2'];
 $address = $_POST['c3'];
 $beha = $_POST['c4'];
 $amount = $_POST['c5'];
+$scholar = $_POST['c6'];
 $id = $_POST['id'];
 
-$sql = "UPDATE `students` SET `name`= '$name', `rollno`='$rollno',  `address`='$address',`behaviour`='$beha',`fee_amount`=$amount WHERE id='$id' ";
+$sql = "UPDATE `students` SET `name`= '$name', `rollno`='$rollno',  `address`='$address',`behaviour`='$beha',`scholarship`='$scholar',`fee_amount`=$amount WHERE id='$id' ";
 $query= mysqli_query($con,$sql);
 
 

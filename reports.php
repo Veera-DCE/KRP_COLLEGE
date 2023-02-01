@@ -34,7 +34,7 @@ if(isset($_SESSION['uname'])) {
           <a class="nav-link" href="./payment.php">Payments</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" target="_blank" href="./reports_print.php">Reports</a>
+          <a class="nav-link" href="./reports.php">Reports</a>
         </li>
       </ul>
       <form class="d-flex">
@@ -56,6 +56,14 @@ if(isset($_SESSION['uname'])) {
                     <div class="card-body">
                         <form action="reports_print.php" method="POST" target="_blank">
                             <div class="row">
+                                <div class="col-md-3">
+                                    <label>Category</label>
+                                    <select name="category" id="category" class="form-select" required>
+                                      <option value="" disabled selected> -- Select -- </option>
+                                      <option value="Paid">Paid List</option>
+                                      <option value="Pending">Pending List</option>
+                                    </select>
+                                </div>
                                 <div class="col-md-3">
                                     <label> Start Date</label>
                                     <input type="date" class="form-control" name="sDate" id="sDate">

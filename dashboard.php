@@ -35,7 +35,7 @@ if(isset($_SESSION['uname'])) {
           <a class="nav-link" href="./payment.php">Payments</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" target="_blank" href="./reports_print.php">Reports</a>
+          <a class="nav-link" href="./reports.php">Reports</a>
         </li>
       </ul>
       <form class="d-flex">

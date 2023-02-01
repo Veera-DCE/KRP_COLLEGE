@@ -34,7 +34,7 @@ if(isset($_SESSION['uname'])) {
           <a class="nav-link" href="./payment.php">Payments</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" target="_blank" href="./reports_print.php">Reports</a>
+          <a class="nav-link" href="./reports.php">Reports</a>
         </li>
       </ul>
       <form class="d-flex">
@@ -67,6 +67,7 @@ if(isset($_SESSION['uname'])) {
                                             <th>Mobile</th>
                                             <th>Address</th>
                                             <th>Behaviour</th>
+                                            <th>Scholarship</th>
                                             <th>Fee Amount</th>
                                             <th>Options</th>
                                         </thead>
@@ -108,13 +109,14 @@ if(isset($_SESSION['uname'])) {
       var sRollno= $('#stu_rollno').val();
       var sAddress= $('#stu_address').val();
       var sBeha= $('#stu_beha').val();
+      var sScholar= $('#stu_scholar').val();
       var sAmount = $('#stu_amount').val();
-      if(sName != '' && sRollno != '' && sAddress != '' && sBeha !='' && sAmount != '')
+      if(sName != '' && sRollno != '' && sAddress != '' && sBeha !='' && sAmount != '' && sScholar != '')
       {
        $.ajax({
          url:"add_student.php",
          type:"post",
-         data:{c1:sName,c2:sRollno,c3:sAddress,c4:sBeha,c5:sAmount},
+         data:{c1:sName,c2:sRollno,c3:sAddress,c4:sBeha,c5:sAmount ,c6:sScholar},
          success:function(data)
          {
            var json = JSON.parse(data);
@@ -125,6 +127,7 @@ if(isset($_SESSION['uname'])) {
               $('#stu_rollno').val('');
               $('#stu_address').val('');
               $('#stu_beha').val('');
+              $('#stu_scholar').val('');
               $('#stu_amount').val('');
            }
            else if(status=='true')
@@ -135,6 +138,7 @@ if(isset($_SESSION['uname'])) {
             $('#stu_rollno').val("");
             $('#stu_address').val("");
             $('#stu_beha').val("");
+            $('#stu_scholar').val('');
             $('#stu_amount').val('');
             $('#addUserModal').modal('hide');
           }
@@ -155,15 +159,16 @@ if(isset($_SESSION['uname'])) {
       var sRollno= $('#Ustu_rollno').val();
       var sAddress= $('#Ustu_address').val();
       var sBeha= $('#Ustu_beha').val();
+      var sScholar= $('#Ustu_scholar').val();
       var sAmount= $('#Ustu_amount').val();
       var trid= $('#trid').val();
       var id= $('#id').val();
-      if(sName != '' && sRollno != '' && sAddress != '' && sBeha !='' && sAmount != '')
+      if(sName != '' && sRollno != '' && sAddress != '' && sBeha !='' && sAmount != '' && sScholar != '')
       {
          $.ajax({
            url:"update_student.php",
            type:"post",
-           data:{c1:sName,c2:sRollno,c3:sAddress,c4:sBeha,c5:sAmount,id:id},
+           data:{c1:sName,c2:sRollno,c3:sAddress,c4:sBeha,c6:sScholar,c5:sAmount,id:id},
            success:function(data)
            {
              var json = JSON.parse(data);
@@ -178,7 +183,7 @@ if(isset($_SESSION['uname'])) {
               // table.cell(parseInt(trid) - 1,4).data(city);
               var button =   '<td><a href="javascript:void();" data-id="' +id + '" class="btn btn-info btn-sm editbtn">Edit</a>  <a href="#!"  data-id="' +id + '"  class="btn btn-danger btn-sm deleteBtn">Delete</a></td>';
               var row = table.row("[id='"+trid+"']");
-              row.row("[id='" + trid + "']").data([id,sName,sRollno,sAddress,sBeha,sAmount,button]);
+              row.row("[id='" + trid + "']").data([id,sName,sRollno,sAddress,sBeha,sScholar,sAmount,button]);
               $('#exampleModal').modal('hide');
             }
             else
@@ -210,6 +215,7 @@ if(isset($_SESSION['uname'])) {
         $('#Ustu_rollno').val(json.rollno);
         $('#Ustu_address').val(json.address);
         $('#Ustu_beha').val(json.behaviour);
+        $('#Ustu_scholar').val(json.scholarship);
         $('#Ustu_amount').val(json.fee_amount);
        $('#id').val(id);
        $('#trid').val(trid);
@@ -297,6 +303,17 @@ if(isset($_SESSION['uname'])) {
             </div>
           </div>
           <div class="mb-3 row">
+            <label for="addCityField" class="col-md-3 form-label">Scholarship</label>
+            <div class="col-md-9">
+              <!-- <input type="text" class="form-control" id="stu_beha" name="stu_beha"> -->
+              <select class="form-select" id="Ustu_scholar" name="Ustu_scholar">
+                  <option value="" selected disabled> -- Select --</option>
+                  <option value="Yes">Yes</option>
+                  <option value="No">No</option>
+              </select>
+            </div>
+          </div>
+          <div class="mb-3 row">
             <label for="addCityField" class="col-md-3 form-label">Fee Amount</label>
             <div class="col-md-9">
               <input type="number" class="form-control" id="Ustu_amount" name="Ustu_amount">
@@ -348,6 +365,17 @@ if(isset($_SESSION['uname'])) {
                   <option value="" selected disabled> -- Select --</option>
                   <option value="Regular">Regular</option>
                   <option value="NonRegular">NonRegular</option>
+              </select>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label for="addCityField" class="col-md-3 form-label">Scholarship</label>
+            <div class="col-md-9">
+              <!-- <input type="text" class="form-control" id="stu_beha" name="stu_beha"> -->
+              <select class="form-select" id="stu_scholar" name="stu_scholar">
+                  <option value="" selected disabled> -- Select --</option>
+                  <option value="Yes">Yes</option>
+                  <option value="No">No</option>
               </select>
             </div>
           </div>

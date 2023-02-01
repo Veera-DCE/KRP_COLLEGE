@@ -5,6 +5,7 @@ $rollno = $_POST['c2'];
 $address = $_POST['c3'];
 $beha = $_POST['c4'];
 $amount = $_POST['c5'];
+$scholar = $_POST['c6'];
 
 $status = false;
 
@@ -26,7 +27,7 @@ if($status) {
     echo json_encode($data);
 }
 else {
-    $sql = "INSERT INTO `students`(`name`, `rollno`, `address`, `behaviour`,`fee_amount`) VALUES ('$name','$rollno','$address','$beha',$amount)";
+    $sql = "INSERT INTO `students`(`name`, `rollno`, `address`, `behaviour`,`scholarship`,`fee_amount`) VALUES ('$name','$rollno','$address','$beha','$scholar',$amount)";
     $query= mysqli_query($con,$sql);
 
     $paymentsql = "INSERT INTO `payment`(`name`, `rollno`, `fee_amount`,`paid`,`balance`,`status`) VALUES ('$name','$rollno',$amount,0,$amount,'B')";
