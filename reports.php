@@ -30,8 +30,14 @@ if(isset($_SESSION['uname'])) {
         <li class="nav-item">
           <a class="nav-link" href="./students.php">Students</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="./payment.php">Payments</a>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Payments
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="./payment.php">College Fee</a></li>
+            <li><a class="dropdown-item" href="./trans_payment.php">Transport Fee</a></li>
+          </ul>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="./reports.php">Reports</a>
@@ -46,7 +52,7 @@ if(isset($_SESSION['uname'])) {
 <div class="container">
 <div class="row g-4 justify-content-center mt-5">
             <!-- Area Chart -->
-            <div class="col-xl-8 col-lg-8">
+            <div class="col-xl-10 col-lg-10">
                 <div class="card shadow mb-4">
                     <!-- Card Header - Dropdown -->
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -56,12 +62,20 @@ if(isset($_SESSION['uname'])) {
                     <div class="card-body">
                         <form action="reports_print.php" method="POST" target="_blank">
                             <div class="row">
-                                <div class="col-md-3">
+                                <div class="col-md-2">
                                     <label>Category</label>
                                     <select name="category" id="category" class="form-select" required>
                                       <option value="" disabled selected> -- Select -- </option>
                                       <option value="Paid">Paid List</option>
                                       <option value="Pending">Pending List</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <label>Fee Type</label>
+                                    <select name="fType" id="fType" class="form-select" required>
+                                      <option value="" disabled selected> -- Select -- </option>
+                                      <option value="college">College Fee</option>
+                                      <option value="transport">Transport Fee</option>
                                     </select>
                                 </div>
                                 <div class="col-md-3">

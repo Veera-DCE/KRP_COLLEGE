@@ -30,8 +30,14 @@ if(isset($_SESSION['uname'])) {
         <li class="nav-item">
           <a class="nav-link" href="./sales.php">Students</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="./payment.php">Payments</a>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Payments
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="./payment.php">College Fee</a></li>
+            <li><a class="dropdown-item" href="./trans_payment.php">Transport Fee</a></li>
+          </ul>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="./reports.php">Reports</a>
@@ -46,7 +52,7 @@ if(isset($_SESSION['uname'])) {
 
 <div class="container-fluid">
     <div class="row g-4 justify-content-center mt-5">
-        <div class="col-xl-10 col-lg-10">
+        <div class="col-xl-11 col-lg-11">
             <div class="card shadow mb-4">
                 <div
                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -64,11 +70,12 @@ if(isset($_SESSION['uname'])) {
                                         <thead>
                                             <th>Id</th>
                                             <th>Name</th>
-                                            <th>Mobile</th>
+                                            <th>RollNo</th>
                                             <th>Address</th>
                                             <th>Behaviour</th>
                                             <th>Scholarship</th>
                                             <th>Fee Amount</th>
+                                            <th>Transport</th>
                                             <th>Options</th>
                                         </thead>
                                         <tbody>
@@ -111,12 +118,14 @@ if(isset($_SESSION['uname'])) {
       var sBeha= $('#stu_beha').val();
       var sScholar= $('#stu_scholar').val();
       var sAmount = $('#stu_amount').val();
+      var sTrans = $('#stu_trans').val();
+      var sTransFee = $('#stu_transfee').val();
       if(sName != '' && sRollno != '' && sAddress != '' && sBeha !='' && sAmount != '' && sScholar != '')
       {
        $.ajax({
          url:"add_student.php",
          type:"post",
-         data:{c1:sName,c2:sRollno,c3:sAddress,c4:sBeha,c5:sAmount ,c6:sScholar},
+         data:{c1:sName,c2:sRollno,c3:sAddress,c4:sBeha,c5:sAmount ,c6:sScholar,c7:sTrans,c8:sTransFee},
          success:function(data)
          {
            var json = JSON.parse(data);
@@ -129,6 +138,8 @@ if(isset($_SESSION['uname'])) {
               $('#stu_beha').val('');
               $('#stu_scholar').val('');
               $('#stu_amount').val('');
+              $('#stu_trans').val('');
+              $('#stu_transfee').val('');
            }
            else if(status=='true')
            {
@@ -140,6 +151,8 @@ if(isset($_SESSION['uname'])) {
             $('#stu_beha').val("");
             $('#stu_scholar').val('');
             $('#stu_amount').val('');
+            $('#stu_trans').val('');
+            $('#stu_transfee').val('');
             $('#addUserModal').modal('hide');
           }
           else
@@ -161,6 +174,8 @@ if(isset($_SESSION['uname'])) {
       var sBeha= $('#Ustu_beha').val();
       var sScholar= $('#Ustu_scholar').val();
       var sAmount= $('#Ustu_amount').val();
+      var sTrans= $('#Ustu_trans').val();
+      var sTransfee= $('#Ustu_transfee').val();
       var trid= $('#trid').val();
       var id= $('#id').val();
       if(sName != '' && sRollno != '' && sAddress != '' && sBeha !='' && sAmount != '' && sScholar != '')
@@ -168,7 +183,7 @@ if(isset($_SESSION['uname'])) {
          $.ajax({
            url:"update_student.php",
            type:"post",
-           data:{c1:sName,c2:sRollno,c3:sAddress,c4:sBeha,c6:sScholar,c5:sAmount,id:id},
+           data:{c1:sName,c2:sRollno,c3:sAddress,c4:sBeha,c6:sScholar,c5:sAmount,c7:sTrans,c8:sTransfee,id:id},
            success:function(data)
            {
              var json = JSON.parse(data);
@@ -183,7 +198,7 @@ if(isset($_SESSION['uname'])) {
               // table.cell(parseInt(trid) - 1,4).data(city);
               var button =   '<td><a href="javascript:void();" data-id="' +id + '" class="btn btn-info btn-sm editbtn">Edit</a>  <a href="#!"  data-id="' +id + '"  class="btn btn-danger btn-sm deleteBtn">Delete</a></td>';
               var row = table.row("[id='"+trid+"']");
-              row.row("[id='" + trid + "']").data([id,sName,sRollno,sAddress,sBeha,sScholar,sAmount,button]);
+              row.row("[id='" + trid + "']").data([id,sName,sRollno,sAddress,sBeha,sScholar,sAmount,sTrans,sTransfee,button]);
               $('#exampleModal').modal('hide');
             }
             else
@@ -217,6 +232,8 @@ if(isset($_SESSION['uname'])) {
         $('#Ustu_beha').val(json.behaviour);
         $('#Ustu_scholar').val(json.scholarship);
         $('#Ustu_amount').val(json.fee_amount);
+        $('#Ustu_trans').val(json.transport);
+        $('#Ustu_transfee').val(json.transport_fee);
        $('#id').val(id);
        $('#trid').val(trid);
      }
@@ -319,6 +336,22 @@ if(isset($_SESSION['uname'])) {
               <input type="number" class="form-control" id="Ustu_amount" name="Ustu_amount">
             </div>
           </div>
+          <div class="mb-3 row">
+            <label for="addCityField" class="col-md-3 form-label">Transport</label>
+            <div class="col-md-9">
+              <select class="form-select" id="Ustu_trans" name="Ustu_trans">
+                  <option value="" selected disabled> -- Select --</option>
+                  <option value="Yes">Yes</option>
+                  <option value="No">No</option>
+              </select>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label for="addCityField" class="col-md-3 form-label">Transport Fee</label>
+            <div class="col-md-9">
+              <input type="number" class="form-control" id="Ustu_transfee" name="Ustu_transfee">
+            </div>
+          </div>
       </div>
       <div class="modal-footer">
         <button type="button"  class="btn btn-link" data-bs-dismiss="modal">Close</button>
@@ -371,7 +404,6 @@ if(isset($_SESSION['uname'])) {
           <div class="mb-3 row">
             <label for="addCityField" class="col-md-3 form-label">Scholarship</label>
             <div class="col-md-9">
-              <!-- <input type="text" class="form-control" id="stu_beha" name="stu_beha"> -->
               <select class="form-select" id="stu_scholar" name="stu_scholar">
                   <option value="" selected disabled> -- Select --</option>
                   <option value="Yes">Yes</option>
@@ -383,6 +415,21 @@ if(isset($_SESSION['uname'])) {
             <label for="addCityField" class="col-md-3 form-label">Fee Amount</label>
             <div class="col-md-9">
               <input type="number" class="form-control" id="stu_amount" name="stu_amount">
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label for="addCityField" class="col-md-3 form-label">Transport</label>
+            <div class="col-md-9">
+              <select class="form-select" id="stu_trans" name="stu_trans">
+                  <option value="Yes">Yes</option>
+                  <option selected value="No">No</option>
+              </select>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label for="addCityField" class="col-md-3 form-label">Transport Fee</label>
+            <div class="col-md-9">
+              <input type="number" class="form-control" id="stu_transfee" name="stu_transfee" value="0">
             </div>
           </div>
       </div>

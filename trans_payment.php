@@ -133,7 +133,7 @@ function myFunction2() {
                                                         <?php
                                                             $count  = 0;
                                                             require 'config.php';
-                                                            $query = "SELECT * FROM `payment` ORDER BY id DESC ";
+                                                            $query = "SELECT * FROM `transport_payment` ORDER BY id DESC ";
                                                             $result = mysqli_query($con , $query);
                                                             if(mysqli_num_rows($result)>0) {
                                                                 $count = mysqli_num_rows($result);
@@ -227,7 +227,7 @@ function myFunction2() {
             var bno = $(this).data('id');
             $.ajax({
               type: "POST",
-              url: "payment_log.php",
+              url: "transport_payment_log.php",
               data: {BNO : bno},
               success: function(html){
                   $('#datalog').html(html);
@@ -239,13 +239,11 @@ function myFunction2() {
           var payAmount = $('#emi_amount').val();
           var eDate = $('#emi_date').val();
           var bno2 = $('#billNo').val();
-          var tDate = $('#trans_date').val();
-          var tAmount = $('#trans_amount').val();
           if((payAmount && eDate) || (tDate && tAmount)) {
             $.ajax({
               type: "POST",
-              url: "payment_action.php",
-              data: {bno : bno2 , pay : payAmount , date1 :eDate, tDate : tDate , tAmount :tAmount},
+              url: "transport_payment_action.php",
+              data: {bno : bno2 , pay : payAmount , date1 :eDate},
               success: function(html){
                   window.location.reload();
               }

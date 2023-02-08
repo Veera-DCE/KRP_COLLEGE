@@ -6,6 +6,8 @@ $address = $_POST['c3'];
 $beha = $_POST['c4'];
 $amount = $_POST['c5'];
 $scholar = $_POST['c6'];
+$trans = $_POST['c7'];
+$transfee = $_POST['c8'];
 
 $status = false;
 
@@ -27,9 +29,14 @@ if($status) {
     echo json_encode($data);
 }
 else {
-    $sql = "INSERT INTO `students`(`name`, `rollno`, `address`, `behaviour`,`scholarship`,`fee_amount`) VALUES ('$name','$rollno','$address','$beha','$scholar',$amount)";
+    $sql = "INSERT INTO `students`(`name`, `rollno`, `address`, `behaviour`,`scholarship`,`transport`,`fee_amount`) VALUES ('$name','$rollno','$address','$beha','$scholar','$trans',$amount)";
     $query= mysqli_query($con,$sql);
 
+    if($transfee > 0) {
+        $paymentsql1 = "INSERT INTO `transport_payment`(`name`, `rollno`, `fee_amount`,`paid`,`balance`,`status`) VALUES ('$name','$rollno',$transfee,0,$transfee,'B')";
+        $paymentResult1 = mysqli_query($con,$paymentsql1);
+    } 
+    
     $paymentsql = "INSERT INTO `payment`(`name`, `rollno`, `fee_amount`,`paid`,`balance`,`status`) VALUES ('$name','$rollno',$amount,0,$amount,'B')";
     $paymentResult = mysqli_query($con,$paymentsql);
 

@@ -45,6 +45,7 @@ while($row = mysqli_fetch_assoc($query))
 	$sub_array[] = $row['behaviour'];
 	$sub_array[] = $row['scholarship'];
 	$sub_array[] = $row['fee_amount'];
+	$sub_array[] = $row['transport'];
 	$sub_array[] = '<a href="javascript:void();" data-id="'.$row['id'].'"  class="btn btn-info btn-sm editbtn" >Edit</a>  <a href="javascript:void();" data-id="'.$row['id'].'"  class="btn btn-danger btn-sm deleteBtn" >Delete</a>';
 	$data[] = $sub_array;
 }

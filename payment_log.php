@@ -5,6 +5,7 @@ $q = "SELECT * FROM payment_log WHERE rollno='$BillNo'";
 $r = mysqli_query($con,$q);
 if($r) {
     ?>
+     <h4> Fees </h4>
     <table class="table">
      <tr>
         <th>Date</th>
@@ -38,6 +39,9 @@ if($r) {
     
     </form>
      </table>
+   
+
+     
     <?php
    
 }

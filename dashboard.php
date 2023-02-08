@@ -31,8 +31,14 @@ if(isset($_SESSION['uname'])) {
         <li class="nav-item">
           <a class="nav-link" href="./students.php">Students</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="./payment.php">Payments</a>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Payments
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="./payment.php">College Fee</a></li>
+            <li><a class="dropdown-item" href="./trans_payment.php">Transport Fee</a></li>
+          </ul>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="./reports.php">Reports</a>
